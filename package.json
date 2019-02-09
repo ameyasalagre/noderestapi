@@ -4,7 +4,8 @@
   "description": "restfull api using express and mongodb",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,12 +18,12 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/ameyasalagre/noderestapi#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "ip": "^1.1.5",
-    "mongodb": "^3.0.8",
-    "mongoose": "^5.0.17",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.10",
     "mongos": "0.0.0",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.18.10"
   }
 }
