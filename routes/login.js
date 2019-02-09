@@ -6,9 +6,13 @@ route.get('/',(req,res,next)=>{
 });
 
 route.post('/' , (req , res , err)=> {
-
     if(req){
-        console.log("Request", req);
+        console.log("Username",req.body.username);
+        console.log("Password", req.body.password);
+        console.log("Access-Control-Request-Headers", req.header("Content-Type"));
+        res.send({"usernname":req.body.username ,
+        "Password": req.body.password,
+        "Access-Control-Request-Headers": req.header("Content-Type")});
     }
 
 

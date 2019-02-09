@@ -4,11 +4,9 @@ const express = require('express');
 const router = express.Router(); 
 var ip = require("ip");
 
-// or else we can initialize router object like this ==> 
-// const route = require('express').Router();
+// connect to mongodb
+var MongoPool = require('../config/dbconfig');
 
-var MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb+srv://ameyasalagre:pass12345@cluster0-prqsb.mongodb.net/test';
 
 //**** READ OPERATION**/
 //**** FIND OBJECT IN COLLECTION*/
@@ -33,27 +31,21 @@ router.post('/find', function (req, res) {
 //**** INSERT OBJECT IN COLLECTION*/
 // method for posting data on url : http://localhost:3000/products/insert
 router.post('/insert',(req, res) => {
-
-    MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        
+    MongoPool.getInstance(function (db){
         var dbo = db.db("product");
-
-        var myobj = { product_id: req.body.product_id,
+        var query = { product_id: req.body.product_id,
                       product_name: req.body.product_name,           
                       product_weight: req.body.product_weight,
                       ip: ip.address()
                     };
-
         dbo.collection("product_table").insertOne(myobj, function(err, result) {
-          if (err) throw err;
-          console.log("1 document inserted");
-          db.close();
-          res.status(200).json(myobj);
+            if (err) throw err;
+            console.log("1 document inserted");
+            db.close();
+            res.status(200).json(query);
+          });
+    });
 
-
-        });
-      });
 });
 
 //**** READ ALL OPERATION**/

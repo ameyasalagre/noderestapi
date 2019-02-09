@@ -11,6 +11,4 @@ router.use('/products', productRoute);
 router.use('/market',market);
 router.use('/login',login);
 
-
-
 module.exports = router;
