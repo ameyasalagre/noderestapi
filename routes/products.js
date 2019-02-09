@@ -68,7 +68,6 @@ router.get('/findall',function(req,res){
                 if(err) throw err;
                 res.status(200).json(result);
                 db.close();
-
             });
         });
 });
