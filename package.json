@@ -18,9 +18,11 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/ameyasalagre/noderestapi#readme",
   "dependencies": {
+    "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "ip": "^1.1.5",
+    "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.10",
     "mongos": "0.0.0",
