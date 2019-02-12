@@ -2,11 +2,10 @@
 
 var http = require('http');
 
+// setting port 
 var PORT = process.env.PORT || 80;
-
-
-const app = require('../noderestapi/apps/app');
-
+// importing app module.
+const app = require('../noderestapi/app');
 var server = http.createServer(app);
 
 

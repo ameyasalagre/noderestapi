@@ -38,7 +38,7 @@ router.post('/insert',(req, res) => {
                       product_weight: req.body.product_weight,
                       ip: ip.address()
                     };
-        dbo.collection("product_table").insertOne(myobj, function(err, result) {
+        dbo.collection("product_table").insertOne(query, function(err, result) {
             if (err) throw err;
             console.log("1 document inserted");
             db.close();
