@@ -1,7 +1,8 @@
 const route = require('express').Router();
 var encode = require('../modules/jwsign');
-var mongoClient = require('../config/dbconfig');
 var encrypt = require('../modules/bycript');
+var MongoPool = require('../config/dbconfig');
+var genJw = require('../modules/jwsign');
 
 
 route.get('/',(req,res,next)=>{
@@ -29,8 +30,20 @@ route.post('/register' , (req , res , err)=> {
         encrypt.encryptText(req.body.password).then(function(result, err) {
             if(result){
                 data.password = result;
-                res.status(200);
-                res.send(result);
+
+                    MongoPool.getInstance(function (db ,err){
+                        
+                        var dbo = db.db("product");
+                        dbo.collection("product_table").insertOne(data, function(err, result) {
+                            if (err) throw err;
+                            console.log("1 document inserted");
+                            console.log("Dataaa",data);
+                            db.close();
+                            delete data.password;
+                            
+                            res.status(200).json(genJw.encrypt(data));
+                        });
+                    });
             }
             if(err){
                 res.status(400);
@@ -44,7 +57,8 @@ route.post('/register' , (req , res , err)=> {
 route.post('/login' , (req , res , err)=> {
     if(req){
         // load password from db
-       encrypt.decryptText(req.body.password , req.body.username).then(function(result){
+        //encrypt.decrypttext(req.pass, hashed passowrd from database)
+       encrypt.decryptText(req.body.password , "$2b$10$nZeOTMwdxvFYN6I4RH43jejkbS2vfhMDfnCXhCBMlBtOOhiuTrZYa").then(function(result){
         console.log("value", result);// result will true false
        })
     }
